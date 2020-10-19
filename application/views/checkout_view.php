@@ -1,8 +1,5 @@
 <?php include('top.inc.php');?>
 
-<!---------------------service section---------------->
-<!----------------------------------------------------->
-
 <section>
 
   <div class="container-fluid">
