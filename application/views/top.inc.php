@@ -55,8 +55,15 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav ml-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="<?php echo base_url('product')?>">Home</a>
+        <a class="nav-link" href="<?php echo base_url('product')?>">All Products</a>
       </li>
+	  
+	  <?php
+      foreach($category as $cat):  ?>
+	  <li class="nav-item active">
+        <a class="nav-link" href="<?php echo base_url('product/display/').$cat->id; ?>"><?php echo $cat->name; ?></a>
+      </li>
+	  <?php endforeach; ?>
 	   <li class="nav-item active" >
         <a class="nav-link" href="<?php echo base_url('cart')?>">Cart(<?php echo $this->cart->total_items(); ?>)</a>
       </li>

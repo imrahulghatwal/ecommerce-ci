@@ -11,6 +11,9 @@ class cart extends CI_Controller {
 
 	public function index()
 	{
+		//category
+		$data['category']=$this->Product_Model->display_items('category');
+		$this->load->view('top.inc.php',$data);
 		
 		$data['result']= $this->cart->contents();
 		$this->load->view('cart_view.php',$data);
@@ -35,8 +38,5 @@ class cart extends CI_Controller {
 	public function remove_item($id){
 		$remove = $this->cart->remove($id);
 		redirect('cart/');
-		
 	}
-	
-
 }

@@ -8,7 +8,7 @@ class checkout extends CI_Controller {
 		$this->load->helper('form');
 		$this->load->library('form_validation');
 		$this->load->library('cart');
-		$this->load->model('product_model');
+		$this->load->model('Product_Model');
 	}
 
 	public function index()
@@ -36,7 +36,7 @@ class checkout extends CI_Controller {
 						
 
 		    if($this->form_validation->run() == true){
-				$insert = $this->product_model->insertCustomer($cdata);
+				$insert = $this->Product_Model->insertCustomer($cdata);
 				
 				if($insert){
 					$cid = $insert;
@@ -45,12 +45,17 @@ class checkout extends CI_Controller {
 					if($order){
 						
 						redirect('checkout/order_succ/'.$cid);
+						die();
 					}
 				}
 			}
 		}
 		
 		//show data on frontend
+	//category
+		$data['category']=$this->Product_Model->display_items('category');
+		$this->load->view('top.inc.php',$data);
+   //products		
 		$data['result']= $this->cart->contents();
 		$this->load->view('checkout_view.php',$data);
 		
@@ -61,7 +66,7 @@ class checkout extends CI_Controller {
 		$orderData = ['customer_id'=>$custId,
 		              'grand_total'=>$this->cart->total()];
 					  
-					  $insertOrder = $this->product_model->insertOrder($orderData);
+					  $insertOrder = $this->Product_Model->insertOrder($orderData);
 					  
 					  if($insertOrder){
 						  $cartItems = $this->cart->contents();
@@ -77,7 +82,7 @@ class checkout extends CI_Controller {
 						  }
 						  
 						  if(!empty($orderItemData)){
-							  $insertOrderItems = $this->product_model->insertOrderItems($orderItemData);
+							  $insertOrderItems = $this->Product_Model->insertOrderItems($orderItemData);
 							  
 							  if($insertOrderItems){
 								  $this->cart->destroy();
@@ -91,7 +96,11 @@ class checkout extends CI_Controller {
 	}
 	
 	public function order_succ($cid){
-		 $data['result'] = $this->product_model->display_customer($cid);
+		//category
+		$data['category']=$this->Product_Model->display_items('category');
+		$this->load->view('top.inc.php',$data);
+		//products
+		 $data['result'] = $this->Product_Model->display_customer($cid);
 		 $this->load->view('order_success.php',$data);
 	}
 	
