@@ -7,8 +7,6 @@ echo "345";
 echo "555";
 echo "666";
 echo "777";
-
-echo 888;
 /**
  * CodeIgniter
  *
