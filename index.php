@@ -3,6 +3,7 @@
 echo 123;
 echo "hello123";
 echo "67676";
+echo "345";
 /**
  * CodeIgniter
  *
